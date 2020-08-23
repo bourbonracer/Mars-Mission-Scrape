@@ -5,46 +5,45 @@ from bs4 import BeautifulSoup as bs
 import requests
 import time
 
-# NASA Mars News
 def init_browser():
-    executable_path = {'executable_path': '../../../Chromedriver/chromedriver.exe'}
+    executable_path = {'executable_path': 'chromedriver.exe'}
     return Browser('chrome', **executable_path, headless=False)
 
 def scrape():
     browser = init_browser()
-
-    mars_news_url = 'https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'
+    # ------------------------------- NASA Mars News -------------------------------
+    mars_news_url = 'https://mars.nasa.gov/news/'
     browser.visit(mars_news_url)
+    browser.is_element_present_by_css("ul.item_list li.slide", wait_time=1)
 
+    # time.sleep(7)
     html = browser.html
-    time.sleep(7)
     mars_news_soup = bs(html, 'html.parser')
 
-    news_result = mars_news_soup.find('div', class_="list_text")
+    news_title = mars_news_soup.find('div', class_="content_title").get_text()
+    news_teaser = mars_news_soup.find('div', class_='article_teaser_body').get_text()
 
-    news_title = news_result.find('div', class_="content_title").find('a').text
-    news_teaser = news_result.find('div', class_='article_teaser_body').text
-
-    # print('--------------------------------------------------------------')
-    # print(f'Latest News Title: {news_title}')
-    # print('--------------------------------------------------------------')
+    # print('-------------------------')
+    print(f'Latest News Title: {news_title}')
+    # print('-------------------------')
     # print(f'Teaser Paragraph: {news_teaser}')
-    # print('--------------------------------------------------------------')
+    # print('-------------------------')
 
-    # JPL Mars Space Images - Featured Images
-    jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
+    # ------------------------------- JPL Mars Space Images - Featured Images -------------------------------
+    jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=mars&category=Mars#submit'
     jpl = 'https://www.jpl.nasa.gov'
     browser.visit(jpl_url)
+    browser.is_element_present_by_css("ul.item_list li.slide", wait_time=1)
 
+    # time.sleep(7)
     html = browser.html
-    time.sleep(7)
     jpl_soup = bs(html, 'html.parser')
 
     featured_img_path = jpl_soup.find_all('a', class_="button fancybox")[0].get('data-fancybox-href').strip()
     img_url = jpl  + featured_img_path
     # print(f'Featured Image: {img_url}')
 
-    # Mars Facts
+    # ------------------------------- Mars Facts -------------------------------
     facts_url = 'https://space-facts.com/mars/'
 
     tables = pd.read_html(facts_url)
@@ -57,10 +56,11 @@ def scrape():
     facts_html.replace("\n","")
     # print(facts_html)
 
-    # Mars Hemispheres
+    # ------------------------------- Mars Hemispheres -------------------------------
     usgs_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     usgs = "https://astrogeology.usgs.gov"
     browser.visit(usgs_url)
+    browser.is_element_present_by_css("ul.item_list li.slide", wait_time=1)
 
     html = browser.html
     time.sleep(7)
