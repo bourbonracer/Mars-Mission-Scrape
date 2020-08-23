@@ -10,23 +10,61 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-      <div class="jumbotron text-center">
-        <h1>Mission to Mars</h1>
-        <p>We're going on a trip in our favorite rocket ship zooming through the sky!</p>
-        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
-      </div>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p>We're going on a trip in our favorite rocket ship zooming through the sky!</p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+    <div class="col-lg-12">
       <h2><b>Latest Mars News</b></h2>
-      <h4><b>{{ red_planet.news_title }}</b></h4>
-        <p>{{ red_planet.news_teaser }}</p>
-      <h2><b>Featured Mars Image</b></h2>
-      <img src="{{ red_planet.img_url }}" alt="Featured Image">
-      <h4>Mars Facts</h4>
-      {{red_planet.facts_html}}
-      <h2><b>Mars Hemispheres</b></h2>
-      <img src="{{ red_planet.hemisphere_data }}" alt="Mars Hemisphere">
+      <h4><b>{{ red_planet.latest_news_title }}</b></h4>
+      <p>{{ red_planet.news_teaser }}</p>
     </div>
+    <div id="feat-img-facts" class="row">
+      <div class="col-lg-8">
+        <h2><b>Featured Mars Image</b></h2>
+        <img src="{{ red_planet.feat_img_url }}" class="img-responsive" alt="Featured Image">
+      </div>
+      <div class="col-lg-4">
+        <h4>Mars Facts</h4>
+        <div class="table-responsive">
+          <table class="table">
+            {{ red_planet.mars_facts_html | safe }}
+          </table>
+        </div>
+      </div>
     </div>
-  </body>
-  
-  </html>
+    <div class="row">
+      <div id="hemispheres-title" class="col-lg-12">
+        <h2 class="text-center"><b>Mars Hemispheres</b></h2>
+        <hr/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="hemispheres-imgs" class="col-sm-5 col-lg-5">
+        <img src="{{ red_planet.hemisphere[0].IMG }}" class="img-responsive img-center">
+        <h4><b>{{ red_planet.hemisphere[0].Title }}</b></h4>
+      </div>
+      <div id="hemispheres-imgs" class="col-sm-5 col-lg-5">
+        <img src="{{ red_planet.hemisphere[1].IMG }}" class="img-responsive img-center">
+        <h4><b>{{ red_planet.hemisphere[1].Title }}</b></h4>
+      </div>
+    </div>
+    <div class="row">
+      <div id="hemispheres-imgs" class="col-sm-5 col-lg-5">
+        <img src="{{ red_planet.hemisphere[2].IMG }}" class="img-responsive">
+        <h4><b>{{ red_planet.hemisphere[2].Title }}</b></h4>
+      </div>
+      <div id="hemispheres-imgs" class="col-sm-5 col-lg-5">
+        <img src="{{ red_planet.hemisphere[3].IMG }}" class="img-responsive">
+        <h4><b>{{ red_planet.hemisphere[3].Title }}</b></h4>
+      </div>
+    </div>
+
+
+  </div>
+</body>
+
+</html>
