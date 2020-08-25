@@ -43,7 +43,7 @@ def scrape():
     facts_df = tables[0]
     facts_df.columns=["Mars", "Measurements"]
 
-    facts_html = facts_df.to_html()
+    facts_html = facts_df.to_html(index=False)
 
     facts_html.replace("\n","")
 
