@@ -11,7 +11,7 @@ def init_browser():
 
 def scrape():
     browser = init_browser()
-    
+
     # ------------------------------- NASA Mars News -------------------------------
     mars_news_url = 'https://mars.nasa.gov/news/'
     browser.visit(mars_news_url)
@@ -54,7 +54,6 @@ def scrape():
     browser.is_element_present_by_css("ul.item_list li.slide", wait_time=1)
 
     html = browser.html
-    time.sleep(7)
     usgs_soup = bs(html, 'html.parser')
 
     usgs_results =  usgs_soup.find('div', class_="result-list")
