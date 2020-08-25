@@ -11,23 +11,17 @@ def init_browser():
 
 def scrape():
     browser = init_browser()
+    
     # ------------------------------- NASA Mars News -------------------------------
     mars_news_url = 'https://mars.nasa.gov/news/'
     browser.visit(mars_news_url)
     browser.is_element_present_by_css("ul.item_list li.slide", wait_time=1)
 
-    # time.sleep(7)
     html = browser.html
     mars_news_soup = bs(html, 'html.parser')
 
     news_title = mars_news_soup.find('div', class_="content_title").get_text()
     news_teaser = mars_news_soup.find('div', class_='article_teaser_body').get_text()
-
-    # print('-------------------------')
-    print(f'Latest News Title: {news_title}')
-    # print('-------------------------')
-    # print(f'Teaser Paragraph: {news_teaser}')
-    # print('-------------------------')
 
     # ------------------------------- JPL Mars Space Images - Featured Images -------------------------------
     jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=mars&category=Mars#submit'
@@ -35,13 +29,11 @@ def scrape():
     browser.visit(jpl_url)
     browser.is_element_present_by_css("ul.item_list li.slide", wait_time=1)
 
-    # time.sleep(7)
     html = browser.html
     jpl_soup = bs(html, 'html.parser')
 
     featured_img_path = jpl_soup.find_all('a', class_="button fancybox")[0].get('data-fancybox-href').strip()
     img_url = jpl  + featured_img_path
-    # print(f'Featured Image: {img_url}')
 
     # ------------------------------- Mars Facts -------------------------------
     facts_url = 'https://space-facts.com/mars/'
@@ -54,7 +46,6 @@ def scrape():
     facts_html = facts_df.to_html()
 
     facts_html.replace("\n","")
-    # print(facts_html)
 
     # ------------------------------- Mars Hemispheres -------------------------------
     usgs_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
