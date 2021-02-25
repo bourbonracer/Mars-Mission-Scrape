@@ -32,6 +32,6 @@ After the code worked in Jupyter Notebook, it was transfered to Visual Studio Co
 ## Website
 
 In another Python file, Flask, PyMongo and scrape_mars was imported as dependencies.  PyMongo was used to connect with the MongoDB server while Flask was used to activate the scrape function. This app.py would prompt scrape and update MongoDB with this information which the results are then visualized through the index.html.  
-![1-TopWeb](Mission_to_Mars/Mission_to_Mars.jpg)  
-![2-Hemispheres](Mission_to_Mars/Mars_Hemisphere_Grid.jpg)
+![1-TopWeb](Mission_to_Mars/https://github.com/bourbonracer/Mars-Mission-Scrape/blob/master/Mission_to_Mars/Mission_to_Mars.JPG?raw=true)  
+![2-Hemispheres](Mission_to_Mars/https://github.com/bourbonracer/Mars-Mission-Scrape/blob/master/Mission_to_Mars/Mars_Hemisphere_Grid.JPG?raw=true)
 
